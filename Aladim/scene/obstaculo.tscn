@@ -1,0 +1,88 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://scritps/obstaculo.gd" type="Script" id=1]
+[ext_resource path="res://assets/images/aladim/spear04Down.png" type="Texture" id=2]
+[ext_resource path="res://assets/images/aladim/spear04Up.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 23.5696, 266.461 )
+
+[sub_resource type="SegmentShape2D" id=2]
+
+custom_solver_bias = 0.0
+a = Vector2( -2.67216, -157.469 )
+b = Vector2( -0.567482, 190.328 )
+
+[node name="Obstaculo" type="Node2D"]
+
+transform/pos = Vector2( 0, 134 )
+script/script = ExtResource( 1 )
+vel = -400
+
+[node name="down" type="Sprite" parent="."]
+
+transform/pos = Vector2( 0, -310 )
+z/z = 1
+texture = ExtResource( 2 )
+
+[node name="up" type="Sprite" parent="."]
+
+transform/pos = Vector2( 0, 340 )
+z/z = 1
+texture = ExtResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 0.883189, -0.52887, -319.911 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 1 )
+shapes/1/transform = Matrix32( 1, 0, 0, 0.883189, -4.27021, 346.095 )
+shapes/1/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionShape2D01" type="CollisionShape2D" parent="Area2D"]
+
+transform/pos = Vector2( -0.52887, -319.911 )
+transform/scale = Vector2( 1, 0.883189 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="CollisionShape2D02" type="CollisionShape2D" parent="Area2D"]
+
+transform/pos = Vector2( -4.27021, 346.095 )
+transform/scale = Vector2( 1, 0.883189 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 1
+
+[node name="Pontos" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 73.7707, -12.7344 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pontos"]
+
+transform/pos = Vector2( 73.7707, -12.7344 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+
+[connection signal="body_enter" from="Area2D" to="." method="_on_Area2D_body_enter"]
+
+[connection signal="body_enter" from="Pontos" to="." method="_on_Pontos_body_enter"]
+
+

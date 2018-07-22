@@ -1,0 +1,90 @@
+[gd_scene load_steps=12 format=1]
+
+[ext_resource path="res://scritps/start.gd" type="Script" id=1]
+[ext_resource path="res://assets/font/font.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/images/aladimStart/3.png" type="Texture" id=3]
+[ext_resource path="res://assets/images/aladimStart/3a.png" type="Texture" id=4]
+[ext_resource path="res://assets/images/aladimStart/3b.png" type="Texture" id=5]
+[ext_resource path="res://assets/images/aladimStart/3c.png" type="Texture" id=6]
+[ext_resource path="res://assets/images/aladimStart/3d.png" type="Texture" id=7]
+[ext_resource path="res://assets/images/aladim/0.png" type="Texture" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+
+font/size = 100
+font/use_mipmaps = false
+font/use_filter = false
+font/font = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+
+font/size = 100
+font/use_mipmaps = false
+font/use_filter = false
+font/font = ExtResource( 2 )
+
+[sub_resource type="SpriteFrames" id=3]
+
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+} ]
+
+[node name="Start" type="Node2D"]
+
+script/script = ExtResource( 1 )
+
+[node name="Play" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 92.0
+margin/top = 52.0
+margin/right = 1216.0
+margin/bottom = 196.0
+custom_fonts/font = SubResource( 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Play Natan-Game"
+flat = false
+
+[node name="About" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 92.0
+margin/top = 244.0
+margin/right = 1216.0
+margin/bottom = 388.0
+custom_fonts/font = SubResource( 2 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "About"
+flat = false
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+
+transform/pos = Vector2( 1148.86, 486.66 )
+frames = SubResource( 3 )
+animation = "default"
+playing = true
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/pos = Vector2( 72.0962, 486.064 )
+transform/scale = Vector2( 0.429165, 0.499523 )
+texture = ExtResource( 8 )
+
+[connection signal="button_up" from="Play" to="." method="_on_Play_button_up"]
+
+[connection signal="button_up" from="About" to="." method="_on_About_button_up"]
+
+

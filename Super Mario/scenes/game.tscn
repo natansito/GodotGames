@@ -1,0 +1,544 @@
+[gd_scene load_steps=31 format=1]
+
+[ext_resource path="res://scripts/game.gd" type="Script" id=1]
+[ext_resource path="res://scripts/personagem.gd" type="Script" id=2]
+[ext_resource path="res://assets/Personagem/p1_walk01.png" type="Texture" id=3]
+[ext_resource path="res://assets/Personagem/p1_walk02.png" type="Texture" id=4]
+[ext_resource path="res://assets/Personagem/p1_walk03.png" type="Texture" id=5]
+[ext_resource path="res://assets/Personagem/p1_walk04.png" type="Texture" id=6]
+[ext_resource path="res://assets/Personagem/p1_walk05.png" type="Texture" id=7]
+[ext_resource path="res://assets/Personagem/p1_walk06.png" type="Texture" id=8]
+[ext_resource path="res://assets/Personagem/p1_walk07.png" type="Texture" id=9]
+[ext_resource path="res://tilesets/tilesets.tres" type="TileSet" id=10]
+[ext_resource path="res://assets/Tiles/cloud1.png" type="Texture" id=11]
+[ext_resource path="res://assets/Tiles/cloud2.png" type="Texture" id=12]
+[ext_resource path="res://assets/Tiles/cloud3.png" type="Texture" id=13]
+[ext_resource path="res://scenes/moeda.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/lesma .tscn" type="PackedScene" id=15]
+[ext_resource path="res://scenes/blocoDest.tscn" type="PackedScene" id=16]
+[ext_resource path="res://platMovel.gd" type="Script" id=17]
+[ext_resource path="res://assets/Tiles/grassCliffLeft.png" type="Texture" id=18]
+[ext_resource path="res://assets/Tiles/grassMid.png" type="Texture" id=19]
+[ext_resource path="res://assets/Tiles/grassCliffRight.png" type="Texture" id=20]
+[ext_resource path="res://assets/Botoes/esquerda0.png" type="Texture" id=21]
+[ext_resource path="res://assets/Botoes/esquerda1.png" type="Texture" id=22]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 26.4603, 47.9392 )
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 31.177, 0.772461 )
+
+[sub_resource type="RectangleShape2D" id=4]
+
+custom_solver_bias = 0.0
+extents = Vector2( 27.9476, 58.1701 )
+
+[sub_resource type="RectangleShape2D" id=5]
+
+custom_solver_bias = 0.0
+extents = Vector2( 25.8001, 0.456604 )
+
+[sub_resource type="Curve2D" id=6]
+
+bake_interval = 5.0
+_data = {
+"points": Vector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 420, 0 )
+}
+
+[sub_resource type="Curve2D" id=7]
+
+bake_interval = 5.0
+_data = {
+"points": Vector2Array( 0, 0, 0, 0, 3308.49, 470.355, -196.847, 16.8489, 206.021, 10.1437, 3530.03, 641.547, 0, 0, 0, 0, 3749.05, 472.873 )
+}
+
+[sub_resource type="ConvexPolygonShape2D" id=8]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -102.538, -33.7296, -101.401, -34.2984, 102.229, -33.7296, 105.073, -10.4089, 97.679, 9.49911, 57.863, 32.8199, -59.8784, 32.2511, -96.8503, 14.0495, -105.951, -12.6841 )
+
+[node name="game" type="Node"]
+
+script/script = ExtResource( 1 )
+
+[node name="dead_camera" type="Camera2D" parent="."]
+
+anchor_mode = 1
+rotating = false
+current = false
+zoom = Vector2( 1, 1 )
+limit/left = 0
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 800
+drag_margin/h_enabled = true
+drag_margin/v_enabled = true
+smoothing/enable = false
+smoothing/speed = 5.0
+drag_margin/left = 0.2
+drag_margin/top = 0.2
+drag_margin/right = 0.2
+drag_margin/bottom = 0.2
+
+[node name="personagem" type="KinematicBody2D" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 170.225, 148.118 )
+transform/scale = Vector2( 1.07949, 1.04234 )
+z/z = 1
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1.1795, 3, 0.0309649 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 2
+collision/margin = 0.08
+script/script = ExtResource( 2 )
+
+[node name="sprite" type="AnimatedSprite" parent="personagem"]
+
+transform/scale = Vector2( 1.3, 1.3 )
+frames = SubResource( 2 )
+animation = "default"
+frame = 4
+playing = true
+
+[node name="shape" type="CollisionShape2D" parent="personagem"]
+
+transform/pos = Vector2( 3, 0.0309649 )
+transform/scale = Vector2( 1, 1.1795 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="rayE" type="RayCast2D" parent="personagem"]
+
+visibility/light_mask = 2
+transform/pos = Vector2( -22.4238, 8 )
+enabled = true
+cast_to = Vector2( 0, 50 )
+layer_mask = 2
+type_mask = 15
+
+[node name="rayD" type="RayCast2D" parent="personagem"]
+
+transform/pos = Vector2( 27.5419, 8 )
+enabled = true
+cast_to = Vector2( 0, 50 )
+layer_mask = 0
+type_mask = 15
+
+[node name="camera" type="Camera2D" parent="personagem"]
+
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 1, 1 )
+limit/left = 0
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 800
+drag_margin/h_enabled = true
+drag_margin/v_enabled = true
+smoothing/enable = true
+smoothing/speed = 5.0
+drag_margin/left = 0.2
+drag_margin/top = 0.2
+drag_margin/right = 0.2
+drag_margin/bottom = 0.2
+
+[node name="pes" type="Area2D" parent="personagem"]
+
+transform/pos = Vector2( -1.97694, 39.9907 )
+transform/scale = Vector2( 0.817088, 0.223604 )
+input/pickable = true
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1.03785, 0, 0, 0.5, 5, 119.817 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision/layers = 1024
+collision/mask = 8192
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="personagem/pes"]
+
+transform/pos = Vector2( 5, 119.817 )
+transform/scale = Vector2( 1.03785, 0.5 )
+shape = SubResource( 3 )
+trigger = false
+_update_shape_index = 0
+
+[node name="corpo" type="Area2D" parent="personagem"]
+
+input/pickable = true
+shapes/0/shape = SubResource( 4 )
+shapes/0/transform = Matrix32( 0.980422, 0, 0, 1, 3.38629, 4.05249 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision/layers = 1024
+collision/mask = 8192
+
+[node name="shape" type="CollisionShape2D" parent="personagem/corpo"]
+
+transform/pos = Vector2( 3.38629, 4.05249 )
+transform/scale = Vector2( 0.980422, 1 )
+shape = SubResource( 4 )
+trigger = false
+_update_shape_index = 0
+
+[node name="cabeca" type="Area2D" parent="personagem"]
+
+input/pickable = true
+shapes/0/shape = SubResource( 5 )
+shapes/0/transform = Matrix32( 1.01183, 0, 0, 1, 3.50473, -61.9962 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="shape" type="CollisionShape2D" parent="personagem/cabeca"]
+
+transform/pos = Vector2( 3.50473, -61.9962 )
+transform/scale = Vector2( 1.01183, 1 )
+shape = SubResource( 5 )
+trigger = false
+_update_shape_index = 0
+
+[node name="tileMap" type="TileMap" parent="."]
+
+transform/pos = Vector2( -5.14563, -4.21017 )
+mode = 0
+tile_set = ExtResource( 10 )
+cell/size = Vector2( 70, 70 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 2
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( -393180, 0, -196573, 0, -196572, 0, -196571, 0, -196570, 0, -131072, 3, -131062, 0, -65536, 3, 0, 3, 9, 0, 10, 0, 11, 0, 20, 0, 33, 0, 34, 0, 35, 0, 36, 0, 37, 0, 38, 0, 39, 0, 40, 0, 65536, 3, 65555, 0, 65556, 3, 65557, 0, 131072, 3, 131079, 0, 131090, 0, 131091, 3, 131092, 3, 131093, 3, 131094, 0, 196608, 3, 196613, 0, 196614, 0, 196615, 3, 196616, 4, 196617, 4, 196618, 4, 196619, 4, 196620, 4, 196621, 4, 196622, 0, 196623, 0, 196624, 0, 196625, 0, 196626, 3, 196627, 3, 196628, 3, 196629, 3, 196630, 3, 196631, 0, 196640, 0, 196641, 0, 196642, 0, 196643, 0, 196644, 0, 196645, 0, 196646, 0, 196647, 0, 196648, 0, 196649, 0, 196650, 0, 262144, 3, 262148, 0, 262149, 3, 262150, 3, 262151, 3, 262152, 5, 262153, 5, 262154, 5, 262155, 0, 262156, 5, 262157, 5, 262158, 3, 262159, 3, 262160, 3, 262161, 3, 262162, 3, 262163, 3, 262164, 3, 262165, 3, 262166, 3, 262167, 3, 262168, 0, 262174, 0, 327680, 3, 327681, 0, 327682, 0, 327683, 0, 327684, 3, 327685, 3, 327686, 3, 327687, 3, 327688, 5, 327689, 5, 327690, 5, 327691, 5, 327692, 5, 327693, 5, 327694, 3, 327695, 3, 327696, 3, 327697, 3, 327698, 3, 327699, 3, 327700, 3, 327701, 3, 327702, 3, 327703, 3, 327704, 3, 327705, 0, 393216, 3, 393217, 3, 393218, 3, 393219, 3, 393220, 3, 393221, 3, 393222, 3, 393223, 3, 393224, 5, 393225, 5, 393226, 5, 393227, 5, 393228, 5, 393229, 5, 393230, 3, 393231, 3, 393232, 3, 393233, 3, 393234, 3, 393235, 3, 393236, 3, 393237, 3, 393238, 3, 393239, 3, 393240, 3, 393241, 3, 393242, 0, 393270, 0, 393271, 0, 393272, 0, 393273, 0, 393274, 0, 393275, 0, 393276, 0, 393277, 0, 458752, 3, 458753, 3, 458754, 3, 458755, 3, 458756, 3, 458757, 3, 458758, 3, 458759, 3, 458760, 3, 458761, 3, 458762, 3, 458763, 3, 458764, 3, 458765, 3, 458766, 3, 458767, 3, 458768, 3, 458769, 3, 458770, 3, 458771, 3, 458772, 3, 458773, 3, 458774, 3, 458775, 3, 458776, 3, 458777, 3, 458778, 3, 458779, 0, 458780, 0, 458781, 0, 458782, 0, 458783, 0, 458784, 0, 458785, 0, 458789, 0, 458793, 0, 458794, 0, 458795, 0, 458796, 0, 458797, 0, 458798, 0, 458806, 3, 458807, 3, 458808, 3, 458809, 3, 458810, 3, 458811, 3, 458812, 3, 458813, 3, 524288, 3, 524289, 3, 524290, 3, 524291, 3, 524292, 3, 524293, 3, 524294, 3, 524295, 3, 524296, 3, 524297, 3, 524298, 3, 524299, 3, 524300, 3, 524301, 3, 524302, 3, 524303, 3, 524304, 3, 524305, 3, 524306, 3, 524307, 3, 524308, 3, 524309, 3, 524310, 3, 524311, 3, 524312, 3, 524313, 3, 524314, 3, 524315, 3, 524316, 3, 524317, 3, 524318, 3, 524319, 3, 524320, 3, 524321, 3, 524322, 3, 524323, 3, 524324, 4, 524325, 4, 524326, 4, 524327, 3, 524328, 3, 524329, 3, 524330, 3, 524331, 3, 524332, 3, 524333, 3, 524334, 3, 524342, 3, 524343, 3, 524344, 3, 524345, 3, 524346, 3, 524347, 3, 524348, 3, 524349, 3, 589824, 3, 589825, 3, 589826, 3, 589827, 3, 589828, 3, 589829, 3, 589830, 3, 589831, 3, 589832, 3, 589833, 3, 589834, 3, 589835, 3, 589836, 3, 589837, 3, 589838, 3, 589839, 3, 589840, 3, 589841, 3, 589842, 3, 589843, 3, 589844, 3, 589845, 3, 589846, 3, 589847, 3, 589848, 3, 589849, 3, 589850, 3, 589851, 3, 589852, 3, 589853, 3, 589854, 3, 589855, 3, 589856, 3, 589857, 3, 589858, 3, 589859, 3, 589860, 5, 589861, 5, 589862, 5, 589863, 3, 589864, 3, 589865, 3, 589866, 3, 589867, 3, 589868, 3, 589869, 3, 589870, 3, 589878, 3, 589879, 3, 589880, 3, 589881, 3, 589882, 3, 589883, 3, 589884, 3, 589885, 3, 655360, 3, 655361, 3, 655362, 3, 655363, 3, 655364, 3, 655365, 3, 655366, 3, 655367, 3, 655368, 3, 655369, 3, 655370, 3, 655371, 3, 655372, 3, 655373, 3, 655374, 3, 655375, 3, 655376, 3, 655377, 3, 655378, 3, 655379, 3, 655380, 3, 655381, 3, 655382, 3, 655383, 3, 655384, 3, 655385, 3, 655386, 3, 655387, 3, 655388, 3, 655389, 3, 655390, 3, 655391, 3, 655392, 3, 655393, 3, 655394, 3, 655395, 3, 655396, 5, 655397, 5, 655398, 5, 655399, 3, 655400, 3, 655401, 3, 655402, 3, 655403, 3, 655404, 3, 655405, 3, 655406, 3, 655414, 3, 655415, 3, 655416, 3, 655417, 3, 655418, 3, 655419, 3, 655420, 3, 655421, 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="parallax" type="ParallaxBackground" parent="."]
+
+editor/display_folded = true
+layer = -1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+scroll/offset = Vector2( 0, 0 )
+scroll/base_offset = Vector2( 0, 0 )
+scroll/base_scale = Vector2( 1, 1 )
+scroll/limit_begin = Vector2( 0, 0 )
+scroll/limit_end = Vector2( 0, 0 )
+scroll/ignore_camera_zoom = true
+
+[node name="layer" type="ParallaxLayer" parent="parallax"]
+
+editor/display_folded = true
+motion/scale = Vector2( 0.5, 1 )
+motion/offset = Vector2( 0, 0 )
+motion/mirroring = Vector2( 0, 0 )
+
+[node name="Sprite" type="Sprite" parent="parallax/layer"]
+
+transform/pos = Vector2( 340.118, -65.5086 )
+texture = ExtResource( 11 )
+
+[node name="Sprite1" type="Sprite" parent="parallax/layer"]
+
+transform/pos = Vector2( 958.7, -113.734 )
+transform/scale = Vector2( 0.99787, 0.9523 )
+texture = ExtResource( 12 )
+
+[node name="Sprite2" type="Sprite" parent="parallax/layer"]
+
+transform/pos = Vector2( 862.752, -275.234 )
+transform/scale = Vector2( 4.04646, 0.915226 )
+texture = ExtResource( 12 )
+
+[node name="Sprite3" type="Sprite" parent="parallax/layer"]
+
+transform/pos = Vector2( 1498.44, -192.292 )
+transform/scale = Vector2( 1.18475, 0.915226 )
+texture = ExtResource( 13 )
+
+[node name="Sprite4" type="Sprite" parent="parallax/layer"]
+
+transform/pos = Vector2( 1950.55, 136.096 )
+transform/scale = Vector2( 2.57826, 0.915226 )
+texture = ExtResource( 13 )
+
+[node name="Sprite5" type="Sprite" parent="parallax/layer"]
+
+transform/pos = Vector2( 2158.75, -265.466 )
+transform/scale = Vector2( 1.18475, 0.915226 )
+texture = ExtResource( 11 )
+
+[node name="Sprite6" type="Sprite" parent="parallax/layer"]
+
+transform/pos = Vector2( 3043.97, -99.0389 )
+transform/scale = Vector2( 1.91301, 0.951236 )
+texture = ExtResource( 11 )
+
+[node name="moeda" type="Node2D" parent="."]
+
+editor/display_folded = true
+transform/rot = 0.306086
+
+[node name="moeda" parent="moeda" instance=ExtResource( 14 )]
+
+transform/pos = Vector2( 658.667, -32.9867 )
+
+[node name="moeda1" parent="moeda" instance=ExtResource( 14 )]
+
+transform/pos = Vector2( 399.581, 177.983 )
+
+[node name="moeda2" parent="moeda" instance=ExtResource( 14 )]
+
+transform/pos = Vector2( 717.887, -32.9867 )
+
+[node name="moeda3" parent="moeda" instance=ExtResource( 14 )]
+
+transform/pos = Vector2( 719.737, -32.9867 )
+
+[node name="moeda4" parent="moeda" instance=ExtResource( 14 )]
+
+transform/pos = Vector2( 788.21, -32.9867 )
+
+[node name="moeda19" parent="moeda" instance=ExtResource( 14 )]
+
+transform/pos = Vector2( 1140, 151.712 )
+
+[node name="moeda20" parent="moeda" instance=ExtResource( 14 )]
+
+transform/pos = Vector2( 1220, 152.14 )
+
+[node name="moeda21" parent="moeda" instance=ExtResource( 14 )]
+
+transform/pos = Vector2( 1060, 151.285 )
+
+[node name="moeda22" parent="moeda" instance=ExtResource( 14 )]
+
+transform/pos = Vector2( 990.001, 150.911 )
+transform/scale = Vector2( 1.01108, 1 )
+
+[node name="moeda5" parent="moeda" instance=ExtResource( 14 )]
+
+transform/pos = Vector2( 453.249, 181.685 )
+
+[node name="moeda6" parent="moeda" instance=ExtResource( 14 )]
+
+transform/pos = Vector2( 1300.83, 118.764 )
+
+[node name="moeda7" parent="moeda" instance=ExtResource( 14 )]
+
+transform/pos = Vector2( 1300.83, 57.6935 )
+
+[node name="moeda8" parent="moeda" instance=ExtResource( 14 )]
+
+transform/pos = Vector2( 2369.18, 169.339 )
+
+[node name="moeda9" parent="moeda" instance=ExtResource( 14 )]
+
+transform/pos = Vector2( 2371.39, -37.941 )
+
+[node name="moeda10" parent="moeda" instance=ExtResource( 14 )]
+
+transform/pos = Vector2( 2510.27, 172.804 )
+
+[node name="moeda11" parent="moeda" instance=ExtResource( 14 )]
+
+transform/pos = Vector2( 2797.54, 173.926 )
+
+[node name="moeda12" parent="moeda" instance=ExtResource( 14 )]
+
+transform/pos = Vector2( 2653.82, 173.836 )
+
+[node name="moeda13" parent="moeda" instance=ExtResource( 14 )]
+
+transform/pos = Vector2( 2603.2, -37.941 )
+
+[node name="moeda25" parent="moeda" instance=ExtResource( 14 )]
+
+transform/pos = Vector2( 2813.2, -36.8191 )
+
+[node name="moeda23" parent="moeda" instance=ExtResource( 14 )]
+
+transform/pos = Vector2( 2464.33, -248.686 )
+
+[node name="moeda24" parent="moeda" instance=ExtResource( 14 )]
+
+transform/pos = Vector2( 2604.32, -247.938 )
+
+[node name="moeda14" parent="moeda" instance=ExtResource( 14 )]
+
+transform/pos = Vector2( 3100.95, 451.205 )
+
+[node name="moeda15" parent="moeda" instance=ExtResource( 14 )]
+
+transform/pos = Vector2( 3260.58, 451.579 )
+
+[node name="moeda16" parent="moeda" instance=ExtResource( 14 )]
+
+transform/pos = Vector2( 2552.63, -446.117 )
+
+[node name="moeda17" parent="moeda" instance=ExtResource( 14 )]
+
+transform/pos = Vector2( 2555.72, -446.117 )
+
+[node name="moeda18" parent="moeda" instance=ExtResource( 14 )]
+
+transform/pos = Vector2( 2555.72, -507.935 )
+
+[node name="inimigos" type="Node2D" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 993.015, 188.31 )
+
+[node name="lesma " parent="inimigos" instance=ExtResource( 15 )]
+
+curve = SubResource( 6 )
+
+[node name="lesma1" parent="inimigos" instance=ExtResource( 15 )]
+
+transform/pos = Vector2( 1540, 0 )
+curve = SubResource( 6 )
+
+[node name="lesma2" parent="inimigos" instance=ExtResource( 15 )]
+
+transform/pos = Vector2( 1400, -210 )
+curve = SubResource( 6 )
+
+[node name="lesma3" parent="inimigos" instance=ExtResource( 15 )]
+
+transform/pos = Vector2( 1471, -420 )
+curve = SubResource( 6 )
+
+[node name="blocos" type="Node2D" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 804.853, -299.301 )
+
+[node name="blocoDest" parent="blocos" instance=ExtResource( 16 )]
+
+[node name="blocoDest 2" parent="blocos" instance=ExtResource( 16 )]
+
+transform/pos = Vector2( 626.866, 100.701 )
+
+[node name="blocoDest3" parent="blocos" instance=ExtResource( 16 )]
+
+transform/pos = Vector2( 1311.63, 352.455 )
+
+[node name="plataformas " type="Node2D" parent="."]
+
+editor/display_folded = true
+
+[node name="platMovel" type="Path2D" parent="plataformas "]
+
+editor/display_folded = true
+transform/pos = Vector2( 1, 0 )
+curve = SubResource( 7 )
+
+[node name="follow" type="PathFollow2D" parent="plataformas /platMovel"]
+
+transform/pos = Vector2( 3308.49, 470.355 )
+offset = 0.0
+h_offset = 0.0
+v_offset = 0.0
+rotate = false
+cubic_interp = true
+loop = true
+lookahead = 4.0
+
+[node name="body" type="KinematicBody2D" parent="plataformas /platMovel/follow"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 8 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 17 )
+
+[node name="Sprite" type="Sprite" parent="plataformas /platMovel/follow/body"]
+
+transform/pos = Vector2( -70, 0 )
+texture = ExtResource( 18 )
+
+[node name="Sprite1" type="Sprite" parent="plataformas /platMovel/follow/body"]
+
+texture = ExtResource( 19 )
+
+[node name="Sprite2" type="Sprite" parent="plataformas /platMovel/follow/body"]
+
+transform/pos = Vector2( 70, 0 )
+texture = ExtResource( 20 )
+
+[node name="poly" type="CollisionPolygon2D" parent="plataformas /platMovel/follow/body"]
+
+build_mode = 0
+polygon = Vector2Array( -102.538, -33.7296, -101.401, -34.2984, 102.229, -33.7296, 105.073, -10.4089, 97.679, 9.49911, 57.863, 32.8199, -59.8784, 32.2511, -96.8503, 14.0495, -105.951, -12.6841 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="canvasLayer" type="CanvasLayer" parent="."]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+
+[node name="controles" type="Node2D" parent="canvasLayer"]
+
+[node name="touchLeft" type="TouchScreenButton" parent="canvasLayer/controles"]
+
+transform/pos = Vector2( -5.9902, 345.287 )
+transform/scale = Vector2( 2.5, 2.5 )
+normal = ExtResource( 21 )
+pressed = ExtResource( 22 )
+bitmask = null
+shape = null
+shape_centered = true
+shape_visible = true
+passby_press = false
+action = ""
+visibility_mode = 0
+
+[connection signal="morreu" from="personagem" to="." method="_on_personagem_morreu"]
+
+[connection signal="body_enter" from="personagem/pes" to="personagem" method="_on_pes_body_enter"]
+
+[connection signal="body_enter" from="personagem/corpo" to="personagem" method="_on_corpo_body_enter"]
+
+[connection signal="body_enter" from="personagem/cabeca" to="personagem" method="_on_cabeca_body_enter"]
+
+

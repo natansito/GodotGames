@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://scripts/menu.gd" type="Script" id=1]
+[ext_resource path="res://assets/img_fundoChao.png" type="Texture" id=2]
+[ext_resource path="res://assets/font100.fnt" type="BitmapFont" id=3]
+
+[node name="Menu" type="Node2D"]
+
+script/script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/pos = Vector2( 725.904, 648.158 )
+transform/scale = Vector2( 1.28626, 2.02824 )
+texture = ExtResource( 2 )
+
+[node name="Play" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 71.0
+margin/top = 105.0
+margin/right = 637.0
+margin/bottom = 231.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color_pressed = Color( 0.96875, 1, 0, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Play"
+flat = false
+
+[node name="Record" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 71.0
+margin/top = 245.0
+margin/right = 637.0
+margin/bottom = 371.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color_pressed = Color( 0.96875, 1, 0, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Record"
+flat = false
+
+[node name="About" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 71.0
+margin/top = 385.0
+margin/right = 637.0
+margin/bottom = 511.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color_pressed = Color( 0.96875, 1, 0, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "About"
+flat = false
+
+[connection signal="button_up" from="Play" to="." method="_on_Play_button_up"]
+
+[connection signal="button_up" from="About" to="." method="_on_About_button_up"]
+
+
